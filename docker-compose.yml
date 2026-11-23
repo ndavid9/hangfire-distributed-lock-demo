@@ -1,0 +1,17 @@
+# Local-only SQL Server for the Hangfire lock lab.
+# Binds to 127.0.0.1. The sa password is a demo default, not a secret to reuse.
+name: hangfire-lock-demo
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-CU16-ubuntu-22.04
+    container_name: hangfire-lock-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "LocalOnly_hf_Passw0rd"
+      MSSQL_PID: Developer
+      MSSQL_MEMORY_LIMIT_MB: "1536"
+    ports:
+      - "127.0.0.1:14333:1433"
+    mem_limit: 2500m
+    shm_size: 256mb
